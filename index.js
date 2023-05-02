@@ -18,9 +18,22 @@ app.get('/chef', (req, res) => {
 
 app.get('/chef/:id', (req, res) => {
     const id = req.params.id;
-    const selectChef = 
     console.log(id);
+    const selectChef = chef.find(c => c._id === id);
+    res.send(selectChef);
 })
+
+app.get('/chef-country/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    if(id === 0){
+        res.send(chef);
+    }
+   else{
+    const countryChef = chef.filter(n => parseInt(n.category_id) === id);
+    res.send(countryChef);
+    } 
+})
+
 
 app.get('/chef-country', (req, res) => {
     res.send(country);
